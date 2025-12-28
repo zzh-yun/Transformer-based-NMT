@@ -1,0 +1,27 @@
+# Core dependencies for RNN Neural Machine Translation (NMT) project
+# Chinese-to-English translation using LSTM encoder-decoder with attention
+
+# Deep Learning Framework
+torch>=1.12.0
+
+# Numerical Computing
+numpy>=1.21.0
+
+# Configuration Management
+hydra-core>=1.3.0
+omegaconf>=2.2.0
+
+# Progress Bar
+tqdm>=4.62.0
+
+# Tokenization
+sentencepiece>=0.1.96  # For English tokenization (SPM)
+jieba>=0.42.1          # For Chinese tokenization
+
+# NLP Evaluation
+nltk>=3.7              # For BLEU score calculation
+
+# Optional: Visualization tools (uncomment if needed)
+# matplotlib>=3.5.0
+# seaborn>=0.12.0
+# scikit-learn>=1.0.0  # For PCA visualization
