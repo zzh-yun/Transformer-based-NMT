@@ -1,0 +1,40 @@
+model_path: /data/250010009/course/nlpAllms/project/Transformer_NMT/checkpoints/exp_rel_pos_ln_bs64_lre5/checkpoint_last.pth
+device: auto    # choices=['cpu', 'cuda', 'auto']
+input_text: "深圳是一座很美丽的城市。"    # A single sentence to translate
+input_file: None   # 'Path to a text file with sentences to translate (one per line)'
+output_file: translations.txt
+reference_file: None # 'Path to the reference translations for evaluation'
+interactive: False
+
+# -- Paths --
+DATA_DIR: '/data/250010009/course/nlpAllms/data/translation_dataset_zh_en'
+CHECKPOINT_DIR: 'checkpoints'
+LOGS_DIR: 'logs'
+
+# -- Model Parameters --
+D_MODEL: 256
+NHEAD: 8
+NUM_ENCODER_LAYERS: 4
+NUM_DECODER_LAYERS: 4
+DIM_FEEDFORWARD: 1024
+DROPOUT: 0.1
+MAX_LEN: 50
+
+# -- Training Parameters --
+NUM_EPOCHS: 30
+BATCH_SIZE: 64
+LEARNING_RATE: 1e-4
+CLIP_GRAD: 10.0
+LOG_INTERVAL: 100
+
+# -- Distributed Training --
+# These can be overridden by command-line arguments
+DISTRIBUTED: False
+LOCAL_RANK: 0
+
+# -- Other --
+NUM_WORKERS: 4
+local_rank: 0
+distributed: False
+
+min_freq: 1

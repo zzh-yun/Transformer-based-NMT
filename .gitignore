@@ -1,0 +1,5 @@
+checkpoints/
+outputs/
+.cursor/
+.vscode/
+**pycache**

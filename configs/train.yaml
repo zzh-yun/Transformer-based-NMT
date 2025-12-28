@@ -1,0 +1,56 @@
+# -- Paths --
+DATA_DIR: '/data/250010009/course/nlpAllms/data/translation_dataset_zh_en'
+CHECKPOINT_DIR: 'checkpoints'
+LOGS_DIR: 'logs'
+
+# -- Model Parameters --
+D_MODEL: 256
+NHEAD: 8
+NUM_ENCODER_LAYERS: 4
+NUM_DECODER_LAYERS: 4
+DIM_FEEDFORWARD: 1024
+DROPOUT: 0.1
+MAX_LEN: 128
+
+# -- Training Parameters --
+NUM_EPOCHS: 30
+BATCH_SIZE: 64
+LEARNING_RATE: 1e-5  # Increased from 1e-5 for better training
+CLIP_GRAD: 5.0
+LOG_INTERVAL: 100
+LABEL_SMOOTHING: 0.1  # Label smoothing factor (0.0-1.0), reduces overfitting to frequent tokens
+EARLY_STOPPING_PATIENCE: 100  # Stop training if validation loss doesn't improve for N epochs
+EARLY_STOPPING_MIN_DELTA: 0.0  # Minimum change to qualify as improvement
+
+# -- Inference Parameters --
+TEMPERATURE: 1.2  # Sampling temperature (1.0=deterministic, >1.0=more random, helps avoid mode collapse)
+REPETITION_PENALTY: 1.2  # Penalty for repeated tokens (>1.0=penalty, 1.0=no penalty, helps avoid repetition)
+VAL_MAX_LEN: 64  # Maximum length for validation decoding (smaller = faster validation)
+
+# -- Distributed Training --
+# 注意: 当使用torchrun启动时，会自动从环境变量检测并启用分布式训练
+# 单GPU训练: python train.py distributed=False
+# 多GPU训练: 使用 train_multi_gpu.sh 脚本或 torchrun 命令
+DISTRIBUTED: False  # 默认值，使用torchrun时会自动设置为True
+LOCAL_RANK: 0       # 默认值，使用torchrun时会自动设置
+
+# -- Other --
+NUM_WORKERS: 4
+local_rank: 0       # Hydra命令行参数，torchrun会自动设置
+distributed: False  # Hydra命令行参数，torchrun会自动检测并启用
+
+min_freq: 1
+
+# -- Resume Training --
+resume_from_checkpoint: null # 'checkpoints/checkpoint_best.pth'  # Path to checkpoint file (e.g., 'checkpoints/checkpoint_last.pth') to resume training, or null to start from scratch
+
+# -- Ablation Study Configuration --
+# Position encoding type: 'absolute' (sinusoidal) or 'relative' (learnable relative position bias)
+POS_ENCODING_TYPE: relative  # choices: ['absolute', 'relative']
+
+# Normalization type: 'layernorm' (standard LayerNorm) or 'rmsnorm' (Root Mean Square Layer Normalization)
+NORM_TYPE: layernorm # choices: ['layernorm', 'rmsnorm']
+
+# Experiment naming
+EXPERIMENT_NAME: null  # Optional: manually specify experiment name (e.g., 'exp1', 'baseline')
+EXPERIMENT_TAG: null  # Optional: add tag to auto-generated experiment name (e.g., 'v1', 'test')
